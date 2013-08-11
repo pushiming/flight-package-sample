@@ -1,0 +1,31 @@
+{
+  "name": "jasmine-flight",
+  "version": "2.1.0",
+  "description": "Extensions to the Jasmine test framework for use with Flight",
+  "main": "lib/jasmine-flight.js",
+  "keywords": [
+    "flight",
+    "jasmine",
+    "test"
+  ],
+  "ignore": [
+    ".*",
+    "test",
+    "package.json",
+    "karma.conf.js",
+    "CONTRIBUTING.md",
+    "CHANGELOG.md"
+  ],
+  "devDependencies": {
+    "flight": "~1.1.0",
+    "jasmine-jquery": "~1.5.2"
+  },
+  "gitHead": "e19f3dcbdacf6ec19fe981ad42371641f2af583d",
+  "readme": "# jasmine-flight [![Build Status](https://travis-ci.org/flightjs/jasmine-flight.png?branch=master)](http://travis-ci.org/flightjs/jasmine-flight)\r\n\r\nExtensions to the Jasmine test framework for use with [Flight](https://github.com/flightjs/flight)\r\n\r\n# Getting started\r\n\r\nInclude [jasmine-flight.js](https://raw.github.com/flightjs/jasmine-flight/master/lib/jasmine-flight.js)\r\nin your app and load it in your test runner.\r\n\r\nOr install it with [Bower](http://bower.io/):\r\n\r\n```bash\r\nbower install --save-dev jasmine-flight\r\n```\r\n\r\n**N.B.** jasmine-flight depends on\r\n[jasmine](https://github.com/pivotal/jasmine) and\r\n[jasmine-jquery](https://github.com/velesin/jasmine-jquery)\r\n\r\njasmine-flight assumes you'll be using RequireJS to load Flight modules, and\r\nthat you've configured the Flight directory path. For example:\r\n\r\n```javascript\r\nrequirejs.config({\r\n  paths: {\r\n    flight: 'bower_components/flight'\r\n  }\r\n});\r\n```\r\n\r\n## Components\r\n\r\n```javascript\r\ndescribeComponent('path/to/component', function () {\r\n  beforeEach(function () {\r\n    setupComponent();\r\n  });\r\n\r\n  it('should do x', function () {\r\n    // a component instance is now accessible as this.component\r\n    // the component root node is attached to the DOM\r\n    // the component root node is also available as this.$node\r\n  });\r\n});\r\n```\r\n\r\n## Mixins\r\n\r\n```javascript\r\ndescribeMixin('path/to/mixin', function () {\r\n  // initialize the component and attach it to the DOM\r\n  beforeEach(function () {\r\n    setupComponent();\r\n  });\r\n\r\n  it('should do x', function () {\r\n    expect(this.component.doSomething()).toBe(expected);\r\n  });\r\n});\r\n```\r\n\r\n## Event spy\r\n\r\n```javascript\r\ndescribeComponent('data/twitter_profile', function () {\r\n  beforeEach(function () {\r\n    setupComponent();\r\n  });\r\n\r\n  describe('listens for uiNeedsTwitterUserId', function () {\r\n    // was the event triggered?\r\n    it('and triggers dataTwitterUserId', function () {\r\n      var eventSpy = spyOnEvent(document, 'dataTwitterProfile');\r\n      $(document).trigger('uiNeedsTwitterUserId', {\r\n        screen_name: 'tbrd'\r\n      });\r\n      expect(eventSpy).toHaveBeenTriggeredOn(document);\r\n    });\r\n\r\n    // is the user id correct?\r\n    it('and has correct id', function () {\r\n      var eventSpy = spyOnEvent(document, 'dataTwitterUserId');\r\n      $(document).trigger('uiNeedsTwitteruserId', {\r\n        screen_name: 'tbrd'\r\n      });\r\n      expect(eventSpy.mostRecentCall.data).toEqual({\r\n        screen_name: 'tbrd',\r\n        id: 4149861\r\n      });\r\n    });\r\n  });\r\n});\r\n```\r\n\r\n## setupComponent\r\n\r\n```javascript\r\nsetupComponent(optionalFixture, optionalOptions);\r\n```\r\n\r\nCalling `setupComponent` twice will create an instance, tear it down and create a new one.\r\n\r\n### HTML Fixtures\r\n\r\n```javascript\r\ndescribeComponent('ui/twitter_profile', function () {\r\n  // is the component attached to the fixture?\r\n  it('this.component.$node has class \"foo\"', function () {\r\n    setupComponent('<span class=\"foo\">Test</span>');\r\n    expect(this.component.$node).toHaveClass('foo');\r\n  });\r\n});\r\n```\r\n\r\n### Component Options\r\n\r\n```javascript\r\ndescribeComponent('data/twitter_profile', function () {\r\n  // is the option set correctly?\r\n  it('this.component.attr.baseUrl is set', function () {\r\n    setupComponent({\r\n      baseUrl: 'http://twitter.com/1.1/'\r\n    });\r\n    expect(this.component.attr.baseUrl).toBe('http://twitter.com/1.1/');\r\n  });\r\n});\r\n```\r\n\r\n# Teardown\r\n\r\nComponents are automatically torn down after each test.\r\n\r\n## Contributing to this project\r\n\r\nAnyone and everyone is welcome to contribute. Please take a moment to\r\nreview the [guidelines for contributing](CONTRIBUTING.md).\r\n\r\n* [Bug reports](CONTRIBUTING.md#bugs)\r\n* [Feature requests](CONTRIBUTING.md#features)\r\n* [Pull requests](CONTRIBUTING.md#pull-requests)\r\n\r\n## Authors\r\n\r\n* [@tbrd](http://github.com/tbrd)\r\n\r\n## Thanks\r\n\r\n* [@esbie](http://github.com/esbie) and\r\n  [@skilldrick](http://github.com/skilldrick) for creating the original\r\n  `describeComponent` & `describeMixin` methods.\r\n* [@necolas](http://github.com/necolas) for ongoing support & development\r\n\r\n## License\r\n\r\nCopyright 2013 Twitter, Inc and other contributors.\r\n\r\nLicensed under the MIT License\r\n",
+  "readmeFilename": "README.md",
+  "_id": "jasmine-flight@2.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/flightjs/jasmine-flight.git"
+  }
+}

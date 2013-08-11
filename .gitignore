@@ -1,0 +1,16 @@
+~*
+*.tmp
+*.bak
+tmp/
+temp/
+
+desktop.ini
+*.db	
+
+.dropbox.cache/
+.svn/
+.idea/
+
+*.log
+node_modules/
+app/bower_components/
